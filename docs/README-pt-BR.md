@@ -47,10 +47,27 @@ O objetivo é apresentar uma solução que vise modernizar esta gestão, de mane
 - Ser notificado quanto existir um desafio pendente a mais de 10 (dez) dias.
 
 ## Dependências do Projeto
-TODO
+- [NestJs](https://nestjs.com/): uma estrutura progressiva do [Node.js](https://nodejs.org/pt-br/) para criar aplicativos do lado do servidor eficientes, confiáveis ​​e escaláveis.
 
 ## Ferramentas Utilizadas
 TODO
+
+## Instalação
+```bash
+yarn install
+```
+
+## Executando a Aplicação
+```bash
+# ambiente de desenvolvimento
+yarn start
+
+# "watch mode"
+yarn start:dev
+
+# ambiente de produção
+yarn start:prod
+```
 
 ## Plataforma do Curso
 - [Udemy](https://www.udemy.com/)

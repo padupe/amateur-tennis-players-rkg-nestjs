@@ -48,10 +48,29 @@ The objective is to present a solution that aims to modernize this management, i
 - Be notified when there is a pending challenge for more than 10 (ten) days.
 
 ## Project Dependencies
-TODO
+- [NestJs](https://nestjs.com/): a progressive [Node.js](https://nodejs.org/en/) framework for building efficient, reliable and scalable server-side applications.
 
 ## Tools Used
 TODO
+
+## Installation
+
+```bash
+yarn install
+```
+
+## Running the app
+
+```bash
+# development
+yarn start
+
+# watch mode
+yarn start:dev
+
+# production mode
+yarn start:prod
+```
 
 ## Course Platform
 - [Udemy](https://www.udemy.com/)
