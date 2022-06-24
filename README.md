@@ -1,3 +1,4 @@
+![img](https://github.com/padupe/amateur-tennis-players-rkg-nestjs/tree/main/assets/banner-project.svg)
 # Amateur Tennis Players Ranking
 > Check the Documentation in pt-BR by clicking 🇧🇷 [here](https://github.com/padupe/amateur-tennis-players-rkg-nestjs/blob/main/docs/README-pt-BR.md 'here').
 
