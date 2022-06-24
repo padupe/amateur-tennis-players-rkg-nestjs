@@ -69,5 +69,13 @@ yarn start:dev
 yarn start:prod
 ```
 
+## Dicas para uso do NestJS
+Comando para criar um `Module`
+```bash
+nest g module {nome_do_module}
+
+# Exemplo
+# nest g module jogadores
+```
 ## Plataforma do Curso
 - [Udemy](https://www.udemy.com/)
