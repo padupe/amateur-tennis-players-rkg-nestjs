@@ -77,5 +77,13 @@ nest g module {nome_do_module}
 # Exemplo
 # nest g module jogadores
 ```
+Comando para cirar um `Controller`
+```bash
+nest g controller {nome_do_controller}
+
+# Examplo
+# nest g controller jogadores
+```
+
 ## Plataforma do Curso
 - [Udemy](https://www.udemy.com/)

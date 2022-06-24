@@ -81,5 +81,13 @@ nest g module {module_name}
 # nest g module players
 ```
 
+Command to create a `Controller`
+```bash
+nest g controller {controller_name}
+
+# Example
+# nest g controller players
+```
+
 ## Course Platform
 - [Udemy](https://www.udemy.com/)
