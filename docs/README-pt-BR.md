@@ -86,5 +86,13 @@ nest g controller {nome_do_controller}
 # nest g controller jogadores
 ```
 
+Comando para cirar um `Service`
+```bash
+nest g service {nome_do_service}
+
+# Examplo
+# nest g service jogadores
+```
+
 ## Plataforma do Curso
 - [Udemy](https://www.udemy.com/)

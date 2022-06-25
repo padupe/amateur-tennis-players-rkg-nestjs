@@ -90,5 +90,13 @@ nest g controller {controller_name}
 # nest g controller players
 ```
 
+Command to create a `Service`
+```bash
+nest g service {service_name}
+
+# Example
+# nest g service players
+```
+
 ## Course Platform
 - [Udemy](https://www.udemy.com/)
