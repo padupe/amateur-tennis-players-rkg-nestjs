@@ -36,3 +36,6 @@ lerna-debug.log*
 
 # Docs
 README-Nest.md
+
+# Packages
+yarn.lock
