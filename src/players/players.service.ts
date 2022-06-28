@@ -24,8 +24,8 @@ export class PlayersService {
         return this.players
     }
 
-    async getPlayerByEmail(email: string): Promise<Player> {
-        const findPlayerByEmail = await this.players.find(
+    async getPlayerByEmail(email): Promise<Player> {
+        const findPlayerByEmail = this.players.find(
             (player) => player.email === email
         )
 
@@ -36,6 +36,14 @@ export class PlayersService {
         }
 
         return findPlayerByEmail
+    }
+
+    async deletePlayerByEmail(email): Promise<void> {
+        const findPlayer = this.players.find((player) => player.email === email)
+
+        this.players = this.players.filter(
+            (player) => player.email !== findPlayer.email
+        )
     }
 
     private create(createPlayerDTO: CreatePlayerDTO): void {
