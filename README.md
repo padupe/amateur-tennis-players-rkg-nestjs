@@ -52,7 +52,7 @@ The objective is to present a solution that aims to modernize this management, i
 - [NestJs](https://nestjs.com/): a progressive [Node.js](https://nodejs.org/en/) framework for building efficient, reliable and scalable server-side applications.
 
 ## Tools Used
-TODO
+- **Database:** [MongoDB](https://www.mongodb.com/)
 
 ## Installation
 

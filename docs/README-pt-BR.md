@@ -51,7 +51,7 @@ O objetivo é apresentar uma solução que vise modernizar esta gestão, de mane
 - [NestJs](https://nestjs.com/): uma estrutura progressiva do [Node.js](https://nodejs.org/pt-br/) para criar aplicativos do lado do servidor eficientes, confiáveis ​​e escaláveis.
 
 ## Ferramentas Utilizadas
-TODO
+- **Banco de Dados:** [MongoDB](https://www.mongodb.com/)
 
 ## Instalação
 ```bash
