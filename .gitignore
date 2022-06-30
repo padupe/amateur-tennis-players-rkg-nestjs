@@ -39,3 +39,6 @@ README-Nest.md
 
 # Packages
 yarn.lock
+
+# Env
+*.env
