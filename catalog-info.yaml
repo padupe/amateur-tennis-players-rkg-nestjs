@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: amateur-tennis-players-rkg-nestjs
+  annotations:
+    github.com/project-slug: padupe/amateur-tennis-players-rkg-nestjs
+spec:
+  type: other
+  lifecycle: unknown
+  owner: test
