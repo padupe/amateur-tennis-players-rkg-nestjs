@@ -49,7 +49,11 @@ The objective is to present a solution that aims to modernize this management, i
 - Be notified when there is a pending challenge for more than 10 (ten) days.
 
 ## Project Dependencies
-- [NestJs](https://nestjs.com/): a progressive [Node.js](https://nodejs.org/en/) framework for building efficient, reliable and scalable server-side applications.
+- [class-transformer](https://www.npmjs.com/package/class-transformer 'class-transformer'): class-transformer allows you to transform plain object to some instance of class and versa;<br>
+- [class-validator](https://www.npmjs.com/package/class-validator): allows use of decorator and non-decorator based validation;<br>
+- [dotenv](https://www.npmjs.com/package/dotenv 'dotenv'): Dotenv is a zero-dependency module that loads environment variables from a `.env` file into `process.env`;<br>
+- [NestJs](https://nestjs.com/): a progressive [Node.js](https://nodejs.org/en/) framework for building efficient, reliable and scalable server-side applications;<br>
+- [reflect-metadata](https://www.npmjs.com/package/reflect-metadata 'reflect-metadata'): A library that serves multiple use cases (dependency composition/injection, runtime type assertions, reflection/mirroring, testing) wants the ability to add additional metadata to a class in a consistent way;<br>
 
 ## Tools Used
 - **Database:** [MongoDB](https://www.mongodb.com/)
