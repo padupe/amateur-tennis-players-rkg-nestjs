@@ -11,6 +11,7 @@ import {
 import { CreatePlayerDTO } from './dtos/createPlayer.dto'
 import { Player } from './interfaces/player.interface'
 import { PlayersService } from './players.service'
+import { PlayersValidationParametersPipe } from './pipes/players-validation-parameters.pipe'
 
 @Controller('api/v1/players')
 export class PlayersController {
@@ -24,7 +25,7 @@ export class PlayersController {
 
     @Get()
     async getPlayers(
-        @Query('email') email: string
+        @Query('email', PlayersValidationParametersPipe) email: string
     ): Promise<Player[] | Player> {
         if (email) {
             return this.playersService.getPlayerByEmail(email)
@@ -34,7 +35,9 @@ export class PlayersController {
     }
 
     @Delete()
-    async deletePlayer(@Query('email') email: string): Promise<void> {
+    async deletePlayer(
+        @Query('email', PlayersValidationParametersPipe) email: string
+    ): Promise<void> {
         this.playersService.deletePlayerByEmail(email)
     }
 }
