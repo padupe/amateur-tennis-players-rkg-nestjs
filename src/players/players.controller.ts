@@ -10,6 +10,7 @@ import {
     ValidationPipe,
 } from '@nestjs/common'
 import { CreatePlayerDTO } from './dtos/createPlayer.dto'
+import { UpdatePlayerDTO } from './dtos/updatePlayer.dto'
 import { Player } from './interfaces/player.interface'
 import { PlayersService } from './players.service'
 import { PlayersValidationParametersPipe } from './pipes/players-validation-parameters.pipe'
@@ -20,17 +21,19 @@ export class PlayersController {
 
     @Post()
     @UsePipes(ValidationPipe)
-    async createPlayer(@Body() createPlayerDTO: CreatePlayerDTO) {
-        await this.playersService.createPlayer(createPlayerDTO)
+    async createPlayer(
+        @Body() createPlayerDTO: CreatePlayerDTO
+    ): Promise<Player> {
+        return await this.playersService.createPlayer(createPlayerDTO)
     }
 
     @Put('/:_id')
     @UsePipes(ValidationPipe)
     async updatePlayer(
-        @Body() createPlayerDTO: CreatePlayerDTO,
+        @Body() updatePlayerDTO: UpdatePlayerDTO,
         @Param('_id', PlayersValidationParametersPipe) _id: string
     ): Promise<void> {
-        await this.playersService.updatePlayer(_id, createPlayerDTO)
+        await this.playersService.updatePlayer(_id, updatePlayerDTO)
     }
 
     @Get()
@@ -42,13 +45,13 @@ export class PlayersController {
     async getPlayerByID(
         @Param('_id', PlayersValidationParametersPipe) _id: string
     ): Promise<Player[] | Player> {
-        return this.playersService.getPlayerById(_id)
+        return this.playersService.getPlayerByID(_id)
     }
 
     @Delete('/:_id')
     async deletePlayer(
         @Param('_id', PlayersValidationParametersPipe) _id: string
     ): Promise<void> {
-        this.playersService.deletePlayerByEmail(_id)
+        this.playersService.deletePlayerById(_id)
     }
 }

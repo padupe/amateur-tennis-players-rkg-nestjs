@@ -4,6 +4,7 @@ import {
     NotFoundException,
 } from '@nestjs/common'
 import { CreatePlayerDTO } from './dtos/createPlayer.dto'
+import { UpdatePlayerDTO } from './dtos/updatePlayer.dto'
 import { Player } from './interfaces/player.interface'
 import { v4 as uuidv4 } from 'uuid'
 import { InjectModel } from '@nestjs/mongoose'
@@ -32,7 +33,7 @@ export class PlayersService {
 
     async updatePlayer(
         _id: string,
-        createPlayerDTO: CreatePlayerDTO
+        updatePlayerDTO: UpdatePlayerDTO
     ): Promise<void> {
         const findPlayer = await this.playerModel.findOne({ _id }).exec()
 
@@ -41,7 +42,7 @@ export class PlayersService {
         }
 
         await this.playerModel
-            .findOneAndUpdate({ _id }, { $set: createPlayerDTO })
+            .findOneAndUpdate({ _id }, { $set: updatePlayerDTO })
             .exec()
     }
 
@@ -49,19 +50,23 @@ export class PlayersService {
         return await this.playerModel.find().exec()
     }
 
-    async getPlayerByEmail(email): Promise<Player> {
-        const findPlayerByEmail = this.playerModel.findOne({ email }).exec()
-
-        if (!findPlayerByEmail) {
-            throw new NotFoundException(
-                `Player with e-mail adress "${email}" not found.`
-            )
-        }
-
-        return findPlayerByEmail
+    async getPlayerByID(_id: string): Promise<Player> {
+        return await this.findPlayerById(_id)
     }
 
-    async deletePlayerByEmail(email): Promise<any> {
-        return await this.playerModel.deleteOne({ email }).exec()
+    async deletePlayerById(_id: string): Promise<any> {
+        this.findPlayerById(_id)
+
+        return await this.playerModel.deleteOne({ _id })
+    }
+
+    private async findPlayerById(_id: string): Promise<Player> {
+        const player = this.playerModel.findOne({ _id }).exec()
+
+        if (!player) {
+            throw new NotFoundException(`Player with id "${_id}" not found.`)
+        }
+
+        return player
     }
 }
