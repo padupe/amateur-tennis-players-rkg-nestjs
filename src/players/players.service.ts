@@ -1,4 +1,8 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common'
+import {
+    BadRequestException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common'
 import { CreatePlayerDTO } from './dtos/createPlayer.dto'
 import { Player } from './interfaces/player.interface'
 import { v4 as uuidv4 } from 'uuid'
@@ -11,16 +15,34 @@ export class PlayersService {
         @InjectModel('Player') private readonly playerModel: Model<Player>
     ) {}
 
-    async createUpdatePlayer(createPlayerDTO: CreatePlayerDTO): Promise<void> {
+    async createPlayer(createPlayerDTO: CreatePlayerDTO): Promise<Player> {
         const { email } = createPlayerDTO
 
         const findPlayer = await this.playerModel.findOne({ email }).exec()
 
         if (findPlayer) {
-            this.update(createPlayerDTO)
-        } else {
-            this.create(createPlayerDTO)
+            throw new BadRequestException(
+                `Player already exists with email ${email}.`
+            )
         }
+
+        const playerCreated = new this.playerModel(createPlayerDTO)
+        return await playerCreated.save()
+    }
+
+    async updatePlayer(
+        _id: string,
+        createPlayerDTO: CreatePlayerDTO
+    ): Promise<void> {
+        const findPlayer = await this.playerModel.findOne({ _id }).exec()
+
+        if (!findPlayer) {
+            throw new NotFoundException(`Player with id ${_id} not found!`)
+        }
+
+        await this.playerModel
+            .findOneAndUpdate({ _id }, { $set: createPlayerDTO })
+            .exec()
     }
 
     async getAllPlayers(): Promise<Player[]> {
@@ -41,21 +63,5 @@ export class PlayersService {
 
     async deletePlayerByEmail(email): Promise<any> {
         return await this.playerModel.deleteOne({ email }).exec()
-    }
-
-    private async create(createPlayerDTO: CreatePlayerDTO): Promise<Player> {
-        const { name, email, phoneNumber } = createPlayerDTO
-
-        const playerCreated = new this.playerModel(createPlayerDTO)
-        return await playerCreated.save()
-    }
-
-    private async update(createPlayerDTO: CreatePlayerDTO): Promise<Player> {
-        return await this.playerModel
-            .findOneAndUpdate(
-                { email: createPlayerDTO.email },
-                { $set: createPlayerDTO }
-            )
-            .exec()
     }
 }
