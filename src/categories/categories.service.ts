@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common'
+import {
+    BadRequestException,
+    Injectable,
+    NotFoundException,
+} from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { CreateCategoryDTO } from './dtos/createCategory.dto'
@@ -15,11 +19,9 @@ export class CategoriesService {
     ): Promise<Category> {
         const { category } = createCategoryDTO
 
-        const categoryValidate = await this.categoryModel
-            .findOne({ category })
-            .exec()
+        const validate = await this.categoryValidate(category)
 
-        if (categoryValidate) {
+        if (validate) {
             throw new BadRequestException(
                 `Category ${category} already exists.`
             )
@@ -27,5 +29,23 @@ export class CategoriesService {
 
         const newCategory = new this.categoryModel(createCategoryDTO)
         return await newCategory.save()
+    }
+
+    async getAllCategories(): Promise<Array<Category>> {
+        return await this.categoryModel.find()
+    }
+
+    async getCategoryById(category: string): Promise<Category> {
+        const validate = await this.categoryValidate(category)
+
+        if (!validate) {
+            throw new NotFoundException(`Category ${category} not found!`)
+        }
+
+        return await this.categoryModel.findOne({ category })
+    }
+
+    private async categoryValidate(category: string): Promise<Category> {
+        return await this.categoryModel.findOne({ category }).exec()
     }
 }
