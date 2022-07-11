@@ -55,13 +55,14 @@ export class PlayersService {
     }
 
     async deletePlayerById(_id: string): Promise<any> {
-        this.findPlayerById(_id)
+        await this.findPlayerById(_id)
 
         return await this.playerModel.deleteOne({ _id })
     }
 
     private async findPlayerById(_id: string): Promise<Player> {
-        const player = this.playerModel.findOne({ _id }).exec()
+        const player = await this.playerModel.findOne({ _id }).exec()
+        console.log(`ALORA: ${player}`)
 
         if (!player) {
             throw new NotFoundException(`Player with id "${_id}" not found.`)
