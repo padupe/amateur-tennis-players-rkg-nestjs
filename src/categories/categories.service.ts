@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
+import { PlayersService } from 'src/players/players.service'
 import { CreateCategoryDTO } from './dtos/createCategory.dto'
 import { UpdateCategoryDTO } from './dtos/updateCategory.dto'
 import { Category } from './interfaces/category.interface'
@@ -12,7 +13,8 @@ import { Category } from './interfaces/category.interface'
 @Injectable()
 export class CategoriesService {
     constructor(
-        @InjectModel('Category') private readonly categoryModel: Model<Category>
+        @InjectModel('Category') private readonly categoryModel: Model<Category>,
+        private readonly playersService: PlayersService
     ) {}
 
     async createCategory(
@@ -33,7 +35,7 @@ export class CategoriesService {
     }
 
     async getAllCategories(): Promise<Array<Category>> {
-        return await this.categoryModel.find().exec()
+        return await this.categoryModel.find().populate('players').exec()
     }
 
     async getCategoryById(category: string): Promise<Category> {
@@ -66,7 +68,13 @@ export class CategoriesService {
         const idPlayer = params['idPlayer']
 
         const validateCategory = await this.categoryValidate(category)
-        // const validatePlayer
+        await this.playersService.getPlayerByID(idPlayer)
+
+        const playerAlreadyRegisteredInTheCategory = await this.categoryModel
+            .find({ category })
+            .where('players')
+            .in(idPlayer)
+            .exec()
 
         if (!validateCategory) {
             throw new BadRequestException(
@@ -74,7 +82,16 @@ export class CategoriesService {
             )
         }
 
+        if (playerAlreadyRegisteredInTheCategory.length > 0) {
+            throw new BadRequestException(
+                `Player ${idPlayer} already registered in the Category ${category}.`
+            )
+        }
+
         validateCategory.players.push(idPlayer)
+        await this.categoryModel
+            .findOneAndUpdate({ category }, { $set: validateCategory })
+            .exec()
     }
 
     private async categoryValidate(category: string): Promise<Category> {
