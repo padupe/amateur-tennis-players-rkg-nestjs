@@ -45,13 +45,13 @@ export class PlayersController {
     async getPlayerByID(
         @Param('_id', PlayersValidationParametersPipe) _id: string
     ): Promise<Player[] | Player> {
-        return this.playersService.getPlayerByID(_id)
+        return await this.playersService.getPlayerByID(_id)
     }
 
     @Delete('/:_id')
     async deletePlayer(
         @Param('_id', PlayersValidationParametersPipe) _id: string
     ): Promise<void> {
-        this.playersService.deletePlayerById(_id)
+        await this.playersService.deletePlayerById(_id)
     }
 }
