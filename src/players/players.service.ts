@@ -6,7 +6,6 @@ import {
 import { CreatePlayerDTO } from './dtos/createPlayer.dto'
 import { UpdatePlayerDTO } from './dtos/updatePlayer.dto'
 import { Player } from './interfaces/player.interface'
-import { v4 as uuidv4 } from 'uuid'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 
@@ -62,7 +61,6 @@ export class PlayersService {
 
     private async findPlayerById(_id: string): Promise<Player> {
         const player = await this.playerModel.findOne({ _id }).exec()
-        console.log(`ALORA: ${player}`)
 
         if (!player) {
             throw new NotFoundException(`Player with id "${_id}" not found.`)
