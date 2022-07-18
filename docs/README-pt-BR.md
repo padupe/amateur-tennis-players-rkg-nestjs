@@ -51,6 +51,7 @@ O objetivo é apresentar uma solução que vise modernizar esta gestão, de mane
 - [class-transformer](https://www.npmjs.com/package/class-transformer 'class-transformer'): o transformador de classe permite que você transforme um objeto simples em alguma instância de classe e vice-versa;<br>
 - [class-validator](https://www.npmjs.com/package/class-validator): permite o uso de validação baseada em decorador e não decorador;<br>
 - [dotenv](https://www.npmjs.com/package/dotenv 'dotenv'): dotenv é um módulo de dependência zero que carrega variáveis ​​de ambiente de um arquivo `.env` para `process.env`;<br>
+- [[moment-timezone](https://www.npmjs.com/package/moment-timezone): biblioteca que permite formatar o fuso horário conforme a área desejada;<br>
 - [NestJs](https://nestjs.com/): uma estrutura progressiva do [Node.js](https://nodejs.org/pt-br/) para criar aplicativos do lado do servidor eficientes, confiáveis ​​e escaláveis;<br>
 - [reflect-metadata](https://www.npmjs.com/package/reflect-metadata 'reflect-metadata'): uma biblioteca que atende vários casos de uso (composição/injeção de dependência, asserções de tipo de tempo de execução, reflexão/espelhamento, teste) desejam a capacidade de adicionar metadados adicionais a uma classe de maneira consistente.
 
