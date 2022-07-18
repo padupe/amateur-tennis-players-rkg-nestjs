@@ -13,7 +13,8 @@ import { Category } from './interfaces/category.interface'
 @Injectable()
 export class CategoriesService {
     constructor(
-        @InjectModel('Category') private readonly categoryModel: Model<Category>,
+        @InjectModel('Category')
+        private readonly categoryModel: Model<Category>,
         private readonly playersService: PlayersService
     ) {}
 
@@ -91,6 +92,24 @@ export class CategoriesService {
         validateCategory.players.push(idPlayer)
         await this.categoryModel
             .findOneAndUpdate({ category }, { $set: validateCategory })
+            .exec()
+    }
+
+    async seePlayerCategory(idPlayer: any): Promise<Category> {
+        const players = await this.playersService.getAllPlayers()
+
+        const playerFilter = players.filter((player) => player._id == idPlayer)
+
+        if (playerFilter.length == 0) {
+            throw new BadRequestException(
+                `The id ${idPlayer} does not belong to a Player.`
+            )
+        }
+
+        return await this.categoryModel
+            .findOne()
+            .where('players')
+            .in(idPlayer)
             .exec()
     }
 
